@@ -35,6 +35,7 @@ cinst googledrive
 
 cinstm virtualbox
 
+cinst nodejs.install
 
 Write-Host "Finished installing "
 Read-Host

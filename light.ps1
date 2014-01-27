@@ -44,5 +44,7 @@ cinstm specflow
 
 cinst vlc
 
+cinst nodejs.install
+
 Write-Host "Finished."
 Read-Host

@@ -25,7 +25,7 @@ cinst SqlServerLocalDb
 cinstm nuget.commandline
 cinst NugetPackageExplorer
 cinst NugetPackageManager
-
+cinst webpicommandline
 cinstm procExp
 
 cinst git

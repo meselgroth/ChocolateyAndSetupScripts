@@ -1,0 +1,48 @@
+;
+; "PowerShell Here" PowerToy
+;
+; Copyright 2006 Scott Hanselman
+; http://www.computerzen.com
+;
+; Modified using the VS2003 Command Shell Here tool as a template May 4, 2006
+;
+
+[version]
+signature="$CHICAGO$"
+
+[PowerShellHereInstall]
+CopyFiles = PowerShellHere.Files.Inf
+AddReg    = PowerShellHere.Reg
+
+[DefaultInstall]
+CopyFiles = PowerShellHere.Files.Inf
+AddReg    = PowerShellHere.Reg
+
+[DefaultUnInstall]
+DelFiles  = PowerShellHere.Files.Inf
+DelReg    = PowerShellHere.Reg
+
+[SourceDisksNames]
+55="PowerShell Prompt Here","",1
+
+[SourceDisksFiles]
+PowerShellHere.INF=55
+
+[DestinationDirs]
+PowerShellHere.Files.Inf = 17
+
+[PowerShellHere.Files.Inf]
+PowerShellHere.INF
+
+[PowerShellHere.Reg]
+HKLM,%UDHERE%,DisplayName,,"%PowerShellHereName%"
+HKLM,%UDHERE%,UninstallString,,"rundll32.exe syssetup.dll,SetupInfObjectInstallAction DefaultUninstall 132 %17%\PowerShellHere.inf"
+HKCR,Directory\Shell\PowerShellHere,,,"%PowerShellHereAccel%"
+HKCR,Directory\Shell\PowerShellHere\command,,,"""C:\WINDOWS\system32\windowspowershell\v1.0\powershell.exe"" -NoExit ""cd '%1'"""
+HKCR,Drive\Shell\PowerShellHere,,,"%PowerShellHereAccel%"
+HKCR,Drive\Shell\PowerShellHere\command,,,"""C:\WINDOWS\system32\windowspowershell\v1.0\powershell.exe"" -NoExit ""cd '%1'"""
+
+[Strings]
+PowerShellHereName="PowerShell Prompt Here PowerToy"
+PowerShellHereAccel="&PowerShell Prompt Here"
+UDHERE="Software\Microsoft\Windows\CurrentVersion\Uninstall\PowerShellHere"

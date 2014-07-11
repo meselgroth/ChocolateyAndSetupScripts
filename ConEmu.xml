@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2014-07-10 14:54:49" build="131225">
+		<key name=".Vanilla" modified="2014-07-11 12:21:45" build="131225">
 			<value name="ColorTable00" type="dword" data="00000000"/>
 			<value name="ColorTable01" type="dword" data="00800000"/>
 			<value name="ColorTable02" type="dword" data="00008000"/>
@@ -119,9 +119,9 @@
 			<value name="bgImageColors" type="dword" data="ffffffff"/>
 			<value name="bgOperation" type="hex" data="00"/>
 			<value name="bgPluginAllowed" type="hex" data="01"/>
-			<value name="AlphaValue" type="hex" data="e0"/>
+			<value name="AlphaValue" type="hex" data="d4"/>
 			<value name="AlphaValueSeparate" type="hex" data="01"/>
-			<value name="AlphaValueInactive" type="hex" data="cc"/>
+			<value name="AlphaValueInactive" type="hex" data="b1"/>
 			<value name="UserScreenTransparent" type="hex" data="00"/>
 			<value name="ColorKeyTransparent" type="hex" data="00"/>
 			<value name="ColorKeyValue" type="dword" data="00010101"/>
@@ -130,8 +130,8 @@
 			<value name="ConWnd Width" type="dword" data="0000007f"/>
 			<value name="ConWnd Height" type="dword" data="00000028"/>
 			<value name="Cascaded" type="hex" data="01"/>
-			<value name="ConWnd X" type="dword" data="00000138"/>
-			<value name="ConWnd Y" type="dword" data="000000a6"/>
+			<value name="ConWnd X" type="dword" data="000000a8"/>
+			<value name="ConWnd Y" type="dword" data="000000a4"/>
 			<value name="16bit Height" type="dword" data="00000000"/>
 			<value name="AutoSaveSizePos" type="hex" data="00"/>
 			<value name="IntegralSize" type="hex" data="00"/>
@@ -385,7 +385,7 @@
 			<value name="Multi.AltCon" type="dword" data="00005b41"/>
 			<value name="Multi.Scroll" type="dword" data="00005b53"/>
 			<value name="Multi.Close" type="dword" data="00005b2e"/>
-			<value name="CloseTabKey" type="dword" data="00125b2e"/>
+			<value name="CloseTabKey" type="dword" data="00001173"/>
 			<value name="CloseGroupKey" type="dword" data="00000000"/>
 			<value name="CloseGroupPrcKey" type="dword" data="00000000"/>
 			<value name="CloseAllConKey" type="dword" data="00000000"/>
@@ -514,20 +514,20 @@
 			<value name="DndLKey" type="hex" data="00"/>
 			<value name="DndRKey" type="hex" data="a2"/>
 			<value name="WndDragKey" type="dword" data="00121101"/>
-				<key name="Tasks" modified="2014-07-10 14:54:49" build="131225">
+				<key name="Tasks" modified="2014-07-11 12:21:46" build="131225">
 				<value name="Count" type="dword" data="00000009"/>
-						<key name="Task1" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task1" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{PowerShell}"/>
 					<value name="Hotkey" type="dword" data="00001150"/>
-					<value name="GuiArgs" type="string" data="/dir c:\sandbox\tfsapp"/>
+					<value name="GuiArgs" type="string" data="/dir c:\code"/>
 					<value name="Cmd1" type="string" data="powershell.exe"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-						<key name="Task2" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task2" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{PowerShell (Admin)}"/>
 					<value name="Hotkey" type="dword" data="00101150"/>
-					<value name="GuiArgs" type="string" data="/dir c:\sandbox\tfsapp"/>
+					<value name="GuiArgs" type="string" data="/dir c:\code"/>
 					<value name="Cmd1" type="string" data="powershell.exe -new_console:a"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
@@ -550,15 +550,15 @@
 					<value name="Cmd18" type="string" data="Pop-Location"/>
 					<value name="Cmd19" type="string" data="Start-SshAgent -Quiet"/>
 				</key>
-						<key name="Task3" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task3" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{GitShell}"/>
 					<value name="Hotkey" type="dword" data="00001147"/>
-					<value name="GuiArgs" type="string" data="/dir c:\sandbox\tfsapp"/>
+					<value name="GuiArgs" type="string" data="/dir c:\code"/>
 					<value name="Cmd1" type="string" data="powershell.exe -NoExit -command &quot;&amp; Invoke-Poshgit&quot;"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-						<key name="Task4" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task4" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{cmd}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -566,7 +566,7 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-						<key name="Task5" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task5" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{cmd (Admin)}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -574,7 +574,7 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-						<key name="Task6" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task6" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{Git bash}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -583,7 +583,7 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-						<key name="Task7" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task7" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{cmd 64/32}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -592,7 +592,7 @@
 					<value name="Count" type="dword" data="00000002"/>
 					<value name="Cmd2" type="string" data="&quot;%windir%\syswow64\cmd.exe&quot; /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V"/>
 				</key>
-						<key name="Task8" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task8" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{Show ANSI colors}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -600,7 +600,7 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-						<key name="Task9" modified="2014-07-10 14:54:49" build="131225">
+						<key name="Task9" modified="2014-07-11 12:21:46" build="131225">
 					<value name="Name" type="string" data="{Chocolatey (Admin)}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -609,10 +609,10 @@
 					<value name="Cmd1" type="string" data="*cmd /k Title Chocolatey &amp; &quot;%ConEmuBaseDir%\Addons\ChocolateyAbout.cmd&quot;"/>
 				</key>
 			</key>
-				<key name="Apps" modified="2014-07-10 14:54:49" build="131225">
+				<key name="Apps" modified="2014-07-11 12:21:46" build="131225">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
-				<key name="Colors" modified="2014-07-10 14:54:49" build="131225">
+				<key name="Colors" modified="2014-07-11 12:21:46" build="131225">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
 			<value name="CmdLineHistory" type="multi"><line data="&quot;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&quot;"/></value>

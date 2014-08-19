@@ -41,5 +41,7 @@ cinstm virtualbox
 
 cinst nodejs.install
 
+choco install IsePester
+
 Write-Host "Finished installing "
 Read-Host

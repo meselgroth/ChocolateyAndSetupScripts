@@ -5,41 +5,21 @@ Set-ItemProperty -Path HKCU:\Software\Microsoft\VisualStudio\12.0\General -Name 
 
 cinst sqlce40rtw -source webpi
 cinst sqlcevstools -source webpi
+cinst SqlServerLocalDb
 
-# install nuget
-cinstm nuget.commandline
-cinst NugetPackageExplorer
-cinst NugetPackageManager
+cinst linqpad4
+cinst ilmerge
+cinst kaxaml
+cinst msbuild.communitytasks
 
-cinst baretail
-
-cinstm procExp
-
-cinstm GoogleChrome.Dev
-
-cinstm notepadplusplus
-cinstm fiddler
-cinstm putty
-cinstm kdiff3
-cinstm 7zip
-
-cinstm linqpad4
-cinstm ilmerge
-cinstm dotPeek
-cinstm kaxaml
-cinstm msbuild.communitytasks
-cinstm specflow
-
-cinst MVC3 -source webpi
-cinst MVC3Loc -source webpi
-cinst MVC4 -source webpi
+cinst nodejs.install
 
 cinst dropbox
 cinst googledrive
+cinst skype
+cinst firefox
 
-cinstm virtualbox
-
-cinst nodejs.install
+cinst virtualbox
 
 choco install IsePester
 

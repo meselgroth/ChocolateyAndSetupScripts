@@ -24,11 +24,6 @@ $gitCmd = "$progFiles86\Git\cmd"
 $codeDir = "c:\code"
 $gitHubScriptDir = "$codeDir\ChocolateyAndSetupScripts"
  
-cinst nuget.commandline
-cinst NugetPackageExplorer
-cinst NugetPackageManager
-cinst webpicommandline
-cinst procExp
  
 cinst git
 regsvr32 /u $gitShellPath
@@ -37,18 +32,6 @@ cinst gitextensions
 cinst githubforwindows
  
 cinst notepadplusplus
-cinst fiddler
-cinst baretail
-cinst putty
-cinst dotPeek
-cinst specflow
- 
-cinst vlc
- 
-cinst conemu
- 
- 
-cinst psget
  
 #This isn't required after a successful git installation, left it here just in case needed
 #[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$gitCmd", [EnvironmentVariableTarget]::Machine)

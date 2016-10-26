@@ -14,6 +14,7 @@ cinst putty
 cinst dotPeek
 cinst specflow 
 cinst conemu 
+choco install greenshot
 $codeDir = "c:\code"
 $gitHubScriptDir = "$codeDir\ChocolateyAndSetupScripts"
 
@@ -41,6 +42,9 @@ cinst vlc
 cinst virtualbox
 
 choco install IsePester
+
+#Network debuggin https://gallery.technet.microsoft.com/scriptcenter/Invoke-TSPingSweep-b71f1b9b
+iex ((New-Object System.Net.WebClient).DownloadString('https://gallery.technet.microsoft.com/scriptcenter/Invoke-TSPingSweep-b71f1b9b/file/60234/1/Invoke-TSPingSweep.ps1')
 
 Write-Host "Finished installing "
 Read-Host

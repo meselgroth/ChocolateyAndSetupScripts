@@ -1,4 +1,4 @@
-cinst nodejs.install
+
 cinst firefox
 
 #web essentials, sidewaffle

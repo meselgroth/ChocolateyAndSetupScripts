@@ -5,7 +5,6 @@ cinst webpicommandline
 
 cinst kdiff3
 cinst procExp
-cinst fiddler
 cinst baretail
 cinst putty
 
@@ -26,7 +25,8 @@ git config --global alias.lga “log --graph --oneline --all --decorate”
 #cinst psget
 #This isn't required after a successful git installation, left it here just in case needed
 #[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$gitCmd", [EnvironmentVariableTarget]::Machine)
-install-module posh-git
+install-module posh-git -Force
+Install-Module posh-docker -Force
 
 cinst linqpad4
 cinst ilmerge
@@ -40,7 +40,11 @@ cinst virtualbox
 #Network debuggin https://gallery.technet.microsoft.com/scriptcenter/Invoke-TSPingSweep-b71f1b9b
 iex ((New-Object System.Net.WebClient).DownloadString('https://gallery.technet.microsoft.com/scriptcenter/Invoke-TSPingSweep-b71f1b9b/file/60234/1/Invoke-TSPingSweep.ps1'))
 
+if (-Not (Test-Path $PROFILE)) {
+    New-Item $PROFILE –Type File –Force
+}
 
+Add-Content $PROFILE "`nImport-Module posh-git`nImport-Module posh-docker"
 
 Write-Host "Finished installing "
 Read-Host

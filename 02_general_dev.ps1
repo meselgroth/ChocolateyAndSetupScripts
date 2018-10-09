@@ -44,7 +44,7 @@ if (-Not (Test-Path $PROFILE)) {
     New-Item $PROFILE –Type File –Force
 }
 
-Add-Content $PROFILE "`nImport-Module posh-git`nImport-Module posh-docker"
+Add-Content $PROFILE (Get-Content content-for-ps-profile.ps1)
 
 Write-Host "Finished installing "
 Read-Host

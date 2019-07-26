@@ -7,10 +7,8 @@ npm install jasmine-node -g
 #new node proj
 npm init
 npm install jasmine
-node node_modules/jasmine/bin/jasmine init #maybe not needed with jasmine-node
+node node_modules/jasmine/bin/jasmine init
 #package.json "scripts": { "test": "jasmine" }
 
 eslint --init
 #eslintrc.json "env": { ..., "jasmine" : true }
-
-npm install jasmine-node -g

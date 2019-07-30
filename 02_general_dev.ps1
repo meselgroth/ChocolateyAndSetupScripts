@@ -38,7 +38,7 @@ if (-Not (Test-Path $PROFILE)) {
     New-Item $PROFILE –Type File –Force
 }
 
-Add-Content $PROFILE (Get-Content content-for-ps-profile.ps1)
+Add-Content $PROFILE (Get-Content $gitHubScriptDir\content-for-ps-profile.ps1)
 
 Write-Host "Finished installing "
 Read-Host

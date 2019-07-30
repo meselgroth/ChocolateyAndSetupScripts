@@ -2,8 +2,6 @@
 
 npm install -g eslint #might be mac only
 
-npm install jasmine-node -g
-
 #new node proj, modules requires 12.7+
 npm init
 npm install jasmine

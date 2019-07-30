@@ -1,5 +1,4 @@
 cinst gitextensions
-cinst webpicommandline
 
 cinst kdiff3
 cinst procExp

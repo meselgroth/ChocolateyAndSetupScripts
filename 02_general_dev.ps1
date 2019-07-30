@@ -23,7 +23,7 @@ git config --global alias.lga “log --graph --oneline --all --decorate”
 install-module posh-git -Force
 Install-Module posh-docker -Force
 
-cinst linqpad4
+cinst linqpad5
 cinst ilmerge
 cinst dotPeek
 

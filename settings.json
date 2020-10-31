@@ -1,0 +1,6 @@
+{
+    "telemetry.enableTelemetry": false,
+    "window.zoomLevel": 0,
+    "git.enableSmartCommit": true,
+    "editor.mouseWheelZoom": true
+}

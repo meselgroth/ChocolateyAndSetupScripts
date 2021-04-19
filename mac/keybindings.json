@@ -1,0 +1,44 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "cmd+k cmd+d",
+        "command": "-editor.action.moveSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k cmd+d",
+        "command": "editor.action.formatDocument"
+    },
+    {
+        "key": "shift+cmd+s",
+        "command": "-workbench.action.files.saveAs"
+    },
+    {
+        "key": "shift+cmd+s",
+        "command": "workbench.action.files.saveAll"
+    },
+    {
+        "key": "alt+cmd+s",
+        "command": "-workbench.action.files.saveAll"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "-editor.action.insertLineAfter",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "f2",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "shift+cmd+p",
+        "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    }
+]

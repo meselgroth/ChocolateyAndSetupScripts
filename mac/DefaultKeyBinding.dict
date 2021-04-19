@@ -1,0 +1,10 @@
+{
+  "\UF729"  = moveToBeginningOfLine:; // home
+  "\UF72B"  = moveToEndOfLine:; // end
+  "$\UF729" = moveToBeginningOfLineAndModifySelection:; // shift-home
+  "$\UF72B" = moveToEndOfLineAndModifySelection:; // shift-end
+  "@\UF729" = moveToBeginningOfDocument:; // cmd-home
+  "@\UF72B" = moveToEndOfDocument:; // cmd-end
+  "@$\UF729" = moveToBeginningOfDocumentAndModifySelection:; // cmd-shift-home
+  "@$\UF72B" = moveToEndOfDocumentAndModifySelection:; // cmd-shift-end
+}

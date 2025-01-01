@@ -1,6 +1,6 @@
 
 Import-Module posh-git
-Import-Module posh-docker # PowerShell parameter completion shim for the dotnet CLI 
+#Import-Module posh-docker # PowerShell parameter completion shim for the dotnet CLI 
 
 # PowerShell parameter completion shim for the dotnet CLI 
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {

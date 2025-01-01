@@ -1,0 +1,19 @@
+cinst kdiff3
+
+$codeDir = "c:\code"
+$gitHubScriptDir = "$codeDir\ChocolateyAndSetupScripts"
+mkdir $codeDir
+
+git clone https://github.com/meselgroth/ChocolateyAndSetupScripts.git $gitHubScriptDir
+
+git config --global --add difftool.prompt false
+#git config --global credential.helper wincred
+git config --global alias.lga “log --graph --oneline --all --decorate”
+
+install-module posh-git -Force
+if (-Not (Test-Path $PROFILE)) {
+    New-Item $PROFILE –Type File –Force
+}
+Add-Content $PROFILE (Get-Content $gitHubScriptDir\content-for-ps-profile.ps1)
+
+# NVM - https://github.com/coreybutler/nvm-windows

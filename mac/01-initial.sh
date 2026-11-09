@@ -81,5 +81,7 @@ set_default com.google.Chrome NSUserKeyEquivalents -dict-add 'Open Location…' 
 set_default com.google.Chrome NSUserKeyEquivalents -dict-add 'Show Full History' '@h'
 set_default com.google.Chrome NSUserKeyEquivalents -dict-add 'Hide Google Chrome' '@~h'
 set_default com.apple.finder NSUserKeyEquivalents -dict-add Rename $'\357\234\205'
+source "$MAC_DIR/lib/apple-apps.sh"
+configure_apple_apps
 log "Stage 1 finished. Restart apps or log out/in to apply preferences. Backups: $BACKUP_DIR"
 log 'See README.md for GUI checks, Chrome shortcut verification and Git identity/authentication.'

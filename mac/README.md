@@ -107,7 +107,17 @@ Finish these GUI checks after stage 1:
   reassign the system Show Desktop F11 shortcut so IntelliJ receives F11.
 - In Chrome, verify all three requested shortcuts. Confirm Cmd+H opens history.
 - In Finder, verify F2 renames a selected file and the path bar/hidden files show.
-- Arrange/remove Dock apps manually. For very small desktop icons, use Finder's
+- Stage 1 removes Calendar, Mail, Contacts, Maps, Messages, Music, News, Siri and
+  Reminders from pinned and recent Dock entries, preserving other icons and their
+  order. Apple bundle IDs distinguish them from Yahoo Mail, Google Calendar or
+  similarly named third-party apps. Siri is disabled via user preferences and its
+  menu-bar icon hidden. Confirm in Apple Intelligence & Siri after OS upgrades;
+  preference keys can change. Opening an app again can show its running/recent
+  icon; these changes do not block launching it.
+- These nine apps remain installed: on this Mac they are protected system apps,
+  which [Apple does not support removing through Finder](https://support.apple.com/en-ie/102610).
+  The scripts do not change system protections or delete app data.
+- For very small desktop icons, use Finder's
   View > Show View Options; this avoids replacing your existing view settings.
 - In Control Centre, confirm Bluetooth and Sound show in the menu bar. Modern
   macOS versions may ignore the older visibility preference keys.

@@ -4,10 +4,70 @@ require 'tmpdir'
 require 'open3'
 require 'fileutils'
 require 'rexml/document'
+require_relative '../lib/dock'
 
 class SetupValidation < Minitest::Test
   MAC = File.expand_path('..', __dir__)
   HELPER = File.join(MAC, 'lib/configure.rb')
+
+  def dock_tile(identifier: nil, url: nil, label: 'Localized label')
+    dict = REXML::Element.new('dict')
+    dict.add_element('key').text = 'tile-data'
+    data = dict.add_element('dict')
+    if identifier
+      data.add_element('key').text = 'bundle-identifier'
+      data.add_element('string').text = identifier
+    end
+    data.add_element('key').text = 'file-label'
+    data.add_element('string').text = label
+    if url
+      data.add_element('key').text = 'file-data'
+      file = data.add_element('dict')
+      file.add_element('key').text = '_CFURLString'
+      file.add_element('string').text = url
+    end
+    dict.to_s
+  end
+
+  def test_dock_removes_only_requested_apple_apps_and_preserves_order
+    apple_tiles = DockCleanup::APP_IDS.map { |id| dock_tile(identifier: id) }
+    third_party = dock_tile(identifier: 'com.google.Chrome.calendar', label: 'Calendar')
+    terminal = dock_tile(identifier: 'com.apple.Terminal')
+    xml = "<plist><dict><key>persistent-apps</key><array>#{third_party}#{apple_tiles.join}#{terminal}</array><key>recent-apps</key><array>#{apple_tiles.first}</array><key>tilesize</key><integer>48</integer></dict></plist>"
+    changes = DockCleanup.changes(xml)
+    assert_equal [third_party, terminal], changes['persistent-apps']
+    assert_equal [], changes['recent-apps']
+    refute changes.key?('tilesize')
+    cleaned = "<plist><dict><key>persistent-apps</key><array>#{changes['persistent-apps'].join}</array></dict></plist>"
+    assert_empty DockCleanup.changes(cleaned)
+  end
+
+  def test_dock_legacy_path_matching_never_removes_third_party_or_unknown_tiles
+    assert DockCleanup.remove?(REXML::Document.new(dock_tile(url: 'file:///System/Applications/Mail.app/')).root)
+    refute DockCleanup.remove?(REXML::Document.new(dock_tile(url: 'file:///Users/test/Applications/Mail.app/')).root)
+    refute DockCleanup.remove?(REXML::Document.new(dock_tile(identifier: 'third.party', url: 'file:///System/Applications/Mail.app/')).root)
+    refute DockCleanup.remove?(REXML::Document.new('<dict><key>tile-type</key><string>spacer-tile</string></dict>').root)
+    assert_raises(RuntimeError) { DockCleanup.changes('<plist><dict><key>persistent-apps</key><string>unexpected</string></dict></plist>') }
+  end
+
+  def test_dock_filtered_arrays_can_be_written_by_defaults_without_losing_tile_data
+    Dir.mktmpdir do |dir|
+      domain = "#{dir}/dock"
+      keep = dock_tile(identifier: 'com.apple.Terminal')
+      remove = dock_tile(identifier: 'com.apple.mail')
+      xml = "<plist><dict><key>persistent-apps</key><array>#{remove}#{keep}</array></dict></plist>"
+      filtered = DockCleanup.changes(xml).fetch('persistent-apps')
+      out, status = Open3.capture2e('defaults', 'write', domain, 'persistent-apps', '-array', *filtered)
+      assert status.success?, out
+      out, status = Open3.capture2e('defaults', 'export', domain, '-')
+      assert status.success?, out
+      array = DockCleanup.value(REXML::Document.new(out).elements['plist/dict'], 'persistent-apps')
+      assert_equal 1, array.elements.size
+      assert_equal 'com.apple.Terminal', DockCleanup.value(DockCleanup.value(array.elements[1], 'tile-data'), 'bundle-identifier').text
+      out, status = Open3.capture2e('defaults', 'write', domain, 'persistent-apps', '-array')
+      assert status.success?, out
+    end
+  end
 
   def helper(*args)
     output, status = Open3.capture2e('/usr/bin/ruby', HELPER, *args)

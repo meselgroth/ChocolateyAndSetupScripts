@@ -25,6 +25,8 @@ if [ ! -x /opt/homebrew/bin/brew ]; then
 fi
 require_brew
 bundle Brewfile.initial
+source "$MAC_DIR/lib/vscode.sh"
+ensure_vscode
 
 # Built-in zsh is already the default on new Macs; do not install a second zsh.
 if [ "$DRY_RUN" -eq 1 ] || [ "${SHELL:-}" != /bin/zsh ]; then run chsh -s /bin/zsh; fi

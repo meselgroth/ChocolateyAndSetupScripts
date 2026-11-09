@@ -30,7 +30,7 @@ The setup is deliberately not one large script: each stage is selected explicitl
 ## 1. macOS, Chrome and terminal
 
 Installs Command Line Tools (full Xcode is unnecessary for this baseline), native
-Homebrew, Git, GitHub CLI, Chrome, KDiff3, Rectangle and MeetingBar. Uses Apple's
+Homebrew, Git, GitHub CLI, Chrome, VS Code, KDiff3, Rectangle and MeetingBar. Uses Apple's
 bundled zsh with Oh My Zsh, upstream nvm v0.41.0 and Node LTS. nvm is installed
 upstream rather than through Homebrew, following the
 [nvm instructions](https://github.com/nvm-sh/nvm#installing-and-updating).
@@ -56,6 +56,17 @@ Rerunning installs missing packages without upgrading existing ones. It also
 retains an installed Node LTS rather than upgrading it on every run. To upgrade
 Node intentionally, run `nvm install --lts` in your terminal. This is a repeatable
 configuration, not a lockfile for identical package versions across time.
+
+VS Code is installed separately from the Brewfile with a detection guard. Before
+running `brew install --cask visual-studio-code`, stage 1 checks `/Applications`,
+`~/Applications`, the app behind a `code` CLI symlink on PATH, and Spotlight's
+indexed locations, including renamed app bundles. It verifies the stable VS Code
+bundle identifier and executable, preserving existing manual, Homebrew or other
+package-manager installs without adopting, upgrading or overwriting them.
+Insiders and VSCodium are separate products and do not satisfy this check. A custom
+location must be indexed by Spotlight or exposed by its `code` symlink to be found.
+If Homebrew reports a stale/conflicting installation, inspect it rather than using
+`--force`. The script verifies the app again after installing.
 
 Shell files and Git configuration receive a marked managed block; personal
 content outside that block is preserved. The managed shell configuration loads

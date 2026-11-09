@@ -314,4 +314,84 @@ class SetupValidation < Minitest::Test
     _, status = Open3.capture2e('/bin/bash', '-c', script, 'test', MAC, stdin_data: '')
     refute status.success?
   end
+
+  def vscode_case(identifier: 'com.microsoft.VSCode', executable: true, executable_name: 'Code', installed: true, dry_run: false)
+    Dir.mktmpdir do |dir|
+      app = "#{dir}/Renamed Editor.app"
+      if installed
+        FileUtils.mkdir_p("#{app}/Contents/MacOS")
+        File.write("#{app}/Contents/MacOS/#{executable_name}", '')
+        FileUtils.chmod(0755, "#{app}/Contents/MacOS/#{executable_name}") if executable
+        File.write("#{app}/Contents/Info.plist", "<?xml version=\"1.0\"?><plist version=\"1.0\"><dict><key>CFBundleIdentifier</key><string>#{identifier}</string><key>CFBundleExecutable</key><string>#{executable_name}</string></dict></plist>")
+      end
+      script = <<~'BASH'
+        source "$1/lib/common.sh"
+        source "$1/lib/vscode.sh"
+        vscode_candidates() { printf '%s\n' "$TEST_APP"; }
+        run() { printf 'INSTALL %s\n' "$*"; }
+        DRY_RUN="$TEST_DRY_RUN"
+        ensure_vscode
+      BASH
+      env = { 'TEST_APP' => app, 'TEST_DRY_RUN' => dry_run ? '1' : '0' }
+      out, status = Open3.capture2e(env, '/bin/bash', '-c', script, 'test', MAC)
+      yield out, status
+    end
+  end
+
+  def test_vscode_preserves_an_existing_renamed_app_without_installing
+    ['Code', 'Electron'].each do |name|
+      vscode_case(executable_name: name) do |out, status|
+        assert status.success?, out
+        assert_includes out, 'Renamed Editor.app'
+        refute_includes out, 'INSTALL'
+      end
+    end
+  end
+
+  def test_vscode_discovers_user_apps_cli_symlinks_and_indexed_custom_locations
+    Dir.mktmpdir do |dir|
+      app = "#{dir}/custom/Portable Code.app"
+      cli = "#{app}/Contents/Resources/app/bin/code"
+      FileUtils.mkdir_p(File.dirname(cli))
+      File.write(cli, '')
+      FileUtils.chmod(0755, cli)
+      FileUtils.mkdir_p("#{dir}/bin")
+      File.symlink(cli, "#{dir}/bin/code")
+      script = <<~'BASH'
+        source "$1/lib/common.sh"
+        source "$1/lib/vscode.sh"
+        mdfind() { printf '%s\n' "$HOME/Indexed/Renamed.app"; }
+        vscode_candidates
+      BASH
+      env = { 'HOME' => dir, 'PATH' => "#{dir}/bin:/usr/bin:/bin" }
+      out, status = Open3.capture2e(env, '/bin/bash', '-c', script, 'test', MAC)
+      assert status.success?, out
+      assert_includes out, "#{dir}/Applications/Visual Studio Code.app"
+      assert_includes out, app
+      assert_includes out, "#{dir}/Indexed/Renamed.app"
+    end
+  end
+
+  def test_vscode_installs_when_missing_and_preview_makes_no_changes
+    vscode_case(installed: false, dry_run: true) do |out, status|
+      assert status.success?, out
+      assert_includes out, 'INSTALL /opt/homebrew/bin/brew install --cask visual-studio-code'
+    end
+  end
+
+  def test_vscode_does_not_count_other_editions_or_incomplete_bundles
+    [{ identifier: 'com.microsoft.VSCodeInsiders' }, { executable: false }].each do |options|
+      vscode_case(**options, dry_run: true) do |out, status|
+        assert status.success?, out
+        assert_includes out, 'INSTALL'
+      end
+    end
+  end
+
+  def test_vscode_detects_an_install_that_did_not_produce_a_working_app
+    vscode_case(installed: false) do |out, status|
+      refute status.success?
+      assert_includes out, 'installation could not be verified'
+    end
+  end
 end

@@ -15,7 +15,7 @@ git clone https://github.com/meselgroth/ChocolateyAndSetupScripts.git $gitHubScr
 cp "$gitHubScriptDir\ConEmu.xml" $env:APPDATA
 git config --global --add difftool.prompt false
 #git config --global credential.helper wincred
-git config --global alias.lga “log --graph --oneline --all --decorate”
+git config set --global alias.lga “log --graph --oneline --all --decorate”
 
 #cinst psget
 #This isn't required after a successful git installation, left it here just in case needed

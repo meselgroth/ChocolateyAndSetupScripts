@@ -70,8 +70,8 @@ set_default com.apple.finder AppleShowAllFiles -bool true
 set_default com.apple.finder ShowPathbar -bool true
 set_default com.apple.dock tilesize -int 24
 set_default com.apple.dock minimize-to-application -bool true
-set_default com.apple.controlcenter 'NSStatusItem Visible Bluetooth' -bool true
-set_default com.apple.controlcenter 'NSStatusItem Visible Sound' -bool true
+source "$MAC_DIR/lib/menu-bar.sh"
+configure_menu_bar
 set_default com.apple.Terminal 'Default Window Settings' -string Pro
 set_default com.apple.Terminal 'Startup Window Settings' -string Pro
 

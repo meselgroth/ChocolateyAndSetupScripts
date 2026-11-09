@@ -195,6 +195,31 @@ class SetupValidation < Minitest::Test
     end
   end
 
+  def test_menu_bar_uses_host_preferences_preserves_a_single_backup_and_restarts_only_controlcenter
+    Dir.mktmpdir do |dir|
+      script = <<~'BASH'
+        source "$1/lib/common.sh"
+        source "$1/lib/menu-bar.sh"
+        BACKUP_DIR="$2/backups"
+        defaults() {
+          printf '%s\n' "$*" >> "$BACKUP_DIR/calls"
+          if [ "$2" = export ]; then printf 'original host preferences' > "$4"; fi
+        }
+        killall() { printf 'restart %s\n' "$*" >> "$BACKUP_DIR/calls"; }
+        configure_menu_bar
+      BASH
+      out, status = Open3.capture2e('/bin/bash', '-c', script, 'test', MAC, dir)
+      assert status.success?, out
+      calls = File.read("#{dir}/backups/calls")
+      assert_equal 1, calls.lines.count { |line| line.start_with?('-currentHost export ') }
+      assert_includes calls, '-currentHost write com.apple.controlcenter Bluetooth -int 18'
+      assert_includes calls, '-currentHost write com.apple.controlcenter Sound -int 18'
+      assert_includes calls, 'restart ControlCenter'
+      assert_equal 'original host preferences', File.read("#{dir}/backups/defaults/com.apple.controlcenter.currentHost.plist")
+      refute_includes calls, 'NSStatusItem Visible'
+    end
+  end
+
   def developer_tools_case(ready: false, dry_run: false, existing_marker: false, gui: false, reject_gui: false)
     Dir.mktmpdir do |dir|
       marker = "#{dir}/install-marker"

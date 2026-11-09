@@ -119,8 +119,12 @@ Finish these GUI checks after stage 1:
   The scripts do not change system protections or delete app data.
 - For very small desktop icons, use Finder's
   View > Show View Options; this avoids replacing your existing view settings.
-- In Control Centre, confirm Bluetooth and Sound show in the menu bar. Modern
-  macOS versions may ignore the older visibility preference keys.
+- Stage 1 sets host-specific `com.apple.controlcenter` Bluetooth and Sound values
+  to `18` (always show in the menu bar), then restarts only ControlCenter to reload
+  them. The old global `NSStatusItem Visible …` flags are ineffective for these
+  modules. Confirm both icons in Menu Bar settings (Control Centre on older macOS).
+  Host-specific backups end in `.currentHost.plist`; restore those with
+  `defaults -currentHost import DOMAIN path/to/DOMAIN.currentHost.plist`.
 - Launch Rectangle and grant Accessibility permission. Launch MeetingBar and grant
   the calendar permissions you want. These require interactive macOS consent.
 

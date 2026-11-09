@@ -66,3 +66,14 @@ set_default() {
   fi
   run defaults write "$@"
 }
+
+set_host_default() {
+  local domain="$1" saved="$BACKUP_DIR/defaults/$1.currentHost.plist"
+  if [ "$DRY_RUN" -eq 0 ] && [ ! -e "$saved" ] && [ ! -e "$saved.absent" ]; then
+    mkdir -p "$(dirname "$saved")"
+    if ! defaults -currentHost export "$domain" "$saved" >/dev/null 2>&1; then
+      printf 'Host-specific domain did not exist before setup.\n' > "$saved.absent"
+    fi
+  fi
+  run defaults -currentHost write "$@"
+}

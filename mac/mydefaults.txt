@@ -1,0 +1,48 @@
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install --cask kdiff3
+brew install gh
+
+Reverse trackpad scroll, tap to click
+2 finger right click
+mouse tracking speed full
+
+delete/arrange task bar icons
+Very small icon size
+brew install meetingbar
+brew install --cask rectangle
+show volume and bluetooth in menubar (control centre)
+function keys (not media)
+Dock size small
+Click in scroll bar to jump to spot
+defaults write .GlobalPreferences com.apple.scrollwheel.scaling -1
+defaults write com.apple.Finder AppleShowAllFiles YES
+
+Finder view path
+Don't Correct spelling automatically
+minimise windows into application icon
+
+Xcode
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+keyboard shortcuts
+f5 refresh
+f6 chrome address bar
+Chrome history cmd H
+home end: sentence not page, doesn't work at all in texteditor
+f2 rename
+Find in files (where is this applicable?): shift cmd F
+Find replace: is this standard in Mac across all apps (text edit, vscode, IntelliJ)? If not is cmd H good?
+
+Nvm install
+
+podman install  (run doctor)
+
+
+Intellij
+Use Visual studio resharper keyboard layout
+F11
+x Preview (open with single click)
+Select open file
+Close file
+Navigate back/forward (key)

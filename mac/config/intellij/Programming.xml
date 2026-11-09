@@ -1,0 +1,21 @@
+<keymap version="1" name="Programming" parent="ReSharper">
+  <!-- mac/keybindings.json translated from VS Code commands to IDEA actions. -->
+  <action id="ReformatCode">
+    <keyboard-shortcut first-keystroke="meta K" second-keystroke="meta D" />
+  </action>
+  <action id="SaveAll"><keyboard-shortcut first-keystroke="meta shift S" /></action>
+  <action id="SaveAs" />
+  <action id="ShowIntentionActions"><keyboard-shortcut first-keystroke="meta ENTER" /></action>
+  <action id="EditorStartNewLine" />
+  <action id="RenameElement"><keyboard-shortcut first-keystroke="F2" /></action>
+  <action id="StepInto"><keyboard-shortcut first-keystroke="F11" /></action>
+  <action id="ToggleBookmark" />
+  <action id="FindInPath"><keyboard-shortcut first-keystroke="meta shift F" /></action>
+  <action id="Replace"><keyboard-shortcut first-keystroke="meta H" /></action>
+  <action id="ReplaceInPath"><keyboard-shortcut first-keystroke="meta shift H" /></action>
+  <action id="HideAllWindows" />
+  <action id="CloseContent"><keyboard-shortcut first-keystroke="meta W" /></action>
+  <action id="Back"><keyboard-shortcut first-keystroke="alt LEFT" /></action>
+  <action id="Forward"><keyboard-shortcut first-keystroke="alt RIGHT" /></action>
+  <action id="SelectInProjectView"><keyboard-shortcut first-keystroke="alt F1" /></action>
+</keymap>

@@ -83,7 +83,7 @@ alias fix-yarn="rm -rf node_modules && yarn install --force"
 
 alias alias tf="<REPO_ROOT>/bin/tf.sh"
 
-
+## copied
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -99,6 +99,8 @@ else
         export PATH="/Users/michael.e/miniconda3/bin:$PATH"
     fi
 fi
+#####
+
 unset __conda_setup
 # <<< conda initialize <<<
 

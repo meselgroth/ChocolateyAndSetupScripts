@@ -1,0 +1,6 @@
+brew "git"
+brew "gh"
+cask "meetingbar"
+cask "google-chrome"
+cask "kdiff3"
+cask "rectangle"

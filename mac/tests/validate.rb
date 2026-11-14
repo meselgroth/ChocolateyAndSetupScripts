@@ -5,10 +5,36 @@ require 'open3'
 require 'fileutils'
 require 'rexml/document'
 require_relative '../lib/dock'
+require_relative '../lib/vscode-keybindings'
 
 class SetupValidation < Minitest::Test
   MAC = File.expand_path('..', __dir__)
   HELPER = File.join(MAC, 'lib/configure.rb')
+
+  def test_vscode_enter_open_preserves_jsonc_and_is_idempotent
+    bindings = JSON.parse(File.read("#{MAC}/config/vscode/enter-open.json"))
+    personal = '{ "key": "cmd+k", "command": "mine", "args": { "text": "https://example.test/*keep*/,]" } }'
+    ["[\n]\n", "[#{personal}]", "[\n// my shortcuts ]\n#{personal},\n] // end ]\n"].each do |original|
+      result = VSCodeKeybindings.merge(original, bindings)
+      assert_equal result, VSCodeKeybindings.merge(result, bindings)
+      parsed = JSON.parse(VSCodeKeybindings.jsonc(result))
+      assert_equal bindings.last, parsed.last
+      assert_equal JSON.parse(VSCodeKeybindings.jsonc(original)), parsed[0...-1]
+      assert_includes result, personal unless original == "[\n]\n"
+      assert_includes result, '// my shortcuts ]' if original.include?('// my shortcuts ]')
+    end
+    assert_equal 'filesExplorerFocus && !inputFocus', bindings.last.fetch('when')
+  end
+
+  def test_vscode_keybindings_reject_malformed_content_and_update_managed_binding
+    bindings = [{ 'key' => 'enter', 'command' => 'old' }]
+    first = VSCodeKeybindings.merge("[\n]\n", bindings)
+    updated = VSCodeKeybindings.merge(first, [{ 'key' => 'enter', 'command' => 'new' }])
+    assert_equal ['new'], JSON.parse(VSCodeKeybindings.jsonc(updated)).map { |entry| entry['command'] }
+    ['{broken}', '{}', '[null]', "[\n#{VSCodeKeybindings::FIRST}\n]\n"].each do |original|
+      assert_raises(StandardError) { VSCodeKeybindings.merge(original, bindings) }
+    end
+  end
 
   def dock_tile(identifier: nil, url: nil, label: 'Localized label')
     dict = REXML::Element.new('dict')

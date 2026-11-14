@@ -27,6 +27,7 @@ require_brew
 bundle Brewfile.initial
 source "$MAC_DIR/lib/vscode.sh"
 ensure_vscode
+configure_vscode_enter_open
 
 # Built-in zsh is already the default on new Macs; do not install a second zsh.
 if [ "$DRY_RUN" -eq 1 ] || [ "${SHELL:-}" != /bin/zsh ]; then run chsh -s /bin/zsh; fi
@@ -81,6 +82,7 @@ set_default com.google.Chrome NSUserKeyEquivalents -dict-add 'Open Location…' 
 set_default com.google.Chrome NSUserKeyEquivalents -dict-add 'Show Full History' '@h'
 set_default com.google.Chrome NSUserKeyEquivalents -dict-add 'Hide Google Chrome' '@~h'
 set_default com.apple.finder NSUserKeyEquivalents -dict-add Rename $'\357\234\205'
+set_default com.apple.finder NSUserKeyEquivalents -dict-add Open $'\r'
 source "$MAC_DIR/lib/apple-apps.sh"
 configure_apple_apps
 log "Stage 1 finished. Restart apps or log out/in to apply preferences. Backups: $BACKUP_DIR"

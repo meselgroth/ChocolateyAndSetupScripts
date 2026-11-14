@@ -35,3 +35,9 @@ ensure_vscode() {
     vscode_installed || die 'VS Code installation could not be verified. Inspect the Homebrew output and app location before retrying.'
   fi
 }
+
+configure_vscode_enter_open() {
+  local path="$HOME/Library/Application Support/Code/User/keybindings.json"
+  backup "$path"
+  run /usr/bin/ruby "$MAC_DIR/lib/vscode-keybindings.rb" "$path" "$MAC_DIR/config/vscode/enter-open.json"
+}

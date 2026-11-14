@@ -1,0 +1,7 @@
+[
+  {
+    "key": "enter",
+    "command": "list.select",
+    "when": "filesExplorerFocus && !inputFocus"
+  }
+]

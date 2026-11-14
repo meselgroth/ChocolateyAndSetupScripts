@@ -95,6 +95,23 @@ App shortcuts are merged into existing dictionaries:
 | Chrome | Cmd+H | Show Full History |
 | Chrome | Cmd+Option+H | Hide Google Chrome |
 | Finder | F2 | Rename |
+| Finder | Return | Open selected file or folder |
+
+Finder's Open shortcut uses a carriage return (`$'\r'`), scoped to Finder.
+Relaunch Finder after applying it. Verify Return opens a selected file/folder,
+F2 still renames, and Return still confirms a rename, a search or Go to Folder.
+The saved preference alone does not verify Finder's key handling on a particular
+macOS version; check these behaviours on the desktop before relying on it.
+
+Stage 1 also makes Return open a file (or expand a folder) in VS Code's file
+explorer via `list.select`, scoped to `filesExplorerFocus && !inputFocus`.
+This follows [VS Code's documented explorer binding](https://code.visualstudio.com/updates/v1_10#_configurable-keybindings-for-the-explorer).
+It merges one marked block into the default profile's `Code/User/keybindings.json`,
+preserving personal JSONC entries and comments. VS Code reloads that file live;
+named profiles have separate keybinding files and are not changed. Text editing,
+rename inputs and terminals retain their normal Return behaviour. No global
+Return remap is installed. IntelliJ already uses Enter to navigate from Project
+to source; browsers, Spotlight and Open dialogs use Return to activate selections.
 
 These use English menu labels and must be checked in the running apps; a localized
 or renamed menu item needs the exact current title in the script. Chrome's new
@@ -106,7 +123,9 @@ Finish these GUI checks after stage 1:
 - In Keyboard settings, confirm F1–F12 act as standard function keys. Disable or
   reassign the system Show Desktop F11 shortcut so IntelliJ receives F11.
 - In Chrome, verify all three requested shortcuts. Confirm Cmd+H opens history.
-- In Finder, verify F2 renames a selected file and the path bar/hidden files show.
+- In Finder, verify Return opens a selected file/folder, F2 renames it, Return
+  confirms that rename, and the path bar/hidden files show. In VS Code's file
+  explorer, verify Return opens files/expands folders and confirms rename input.
 - Stage 1 removes Calendar, Mail, Contacts, Maps, Messages, Music, News, Siri and
   Reminders from pinned and recent Dock entries, preserving other icons and their
   order. Apple bundle IDs distinguish them from Yahoo Mail, Google Calendar or
